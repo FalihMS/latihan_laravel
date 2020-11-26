@@ -9,9 +9,13 @@
             min-height: 100vh;
             margin: 0;
         }
+        a.card{
+            color: gray;
+            text-decoration: none;
+        }
         a:hover.card{
-            border-color: #5cb85c;
-            color: #5cb85c;
+            border-color: #0275d8;
+            color: #0275d8;
             text-decoration: none;
         }
     </style>

@@ -30,34 +30,35 @@
            <hr>
            <div class="d-flex justify-content-between align-content-end">
                <h5 class="mt-5 ml-3 text-primary font-weight-bold">Product List</h5>
-               <h5 class="mt-5 ml-3 text-right align-self-baseline">Product Count: <span class="text-primary font-weight-bold">2</span></h5>
+               <h5 class="mt-5 ml-3 text-right align-self-baseline">Product Count: <span class="text-primary font-weight-bold">{{ sizeof($products) }}</span></h5>
            </div>
-           <table class="table">
-               <tr>
-                   <th>Product ID</th>
-                   <th>Product Name</th>
-                   <th>Product Category</th>
-                   <th>Product Qty</th>
-                   <th>Product Price</th>
-                   <th>Actions</th>
-               </tr>
-               <tr class="align-content-center">
-                   <td>1</td>
-                   <td>Indiamie Goreng</td>
-                   <td>Makanan</td>
-                   <td>100 pcs</td>
-                   <td>Rp. 1000</td>
-                   <td><a href="{{ url('/product/1') }}" class="link">View Detail</a></td>
-               </tr>
-               <tr class="align-content-center">
-                   <td>2</td>
-                   <td>Teh Botol sosor</td>
-                   <td>Minuman</td>
-                   <td>50 pcs</td>
-                   <td>Rp. 3500</td>
-                   <td><a href="#" class="link">View Detail</a></td>
-               </tr>
+           <hr>
+           @if(sizeof($products) <= 0)
+               <h5 class="mt-5 ml-3 text-danger font-weight-bold text-center">There is no data</h5>
+           @else
+           <table class="table table-striped">
+               <thead>
+                   <tr class="text-primary">
+                       <th>Product ID</th>
+                       <th>Product Name</th>
+                       <th>Product Category</th>
+                       <th>Product Qty</th>
+                       <th>Product Price</th>
+                       <th>Actions</th>
+                   </tr>
+               </thead>
+               @foreach($products as $product)
+                   <tr class="align-content-center">
+                       <td>{{ $product->id }}</td>
+                       <td>{{ $product->name }}</td>
+                       <td>{{ $product->category }}</td>
+                       <td>{{ $product->qty }} pcs</td>
+                       <td>Rp. {{ $product->price }}</td>
+                       <td><a href="{{ url('/product/'.$product->id) }}" class="link">View Detail</a></td>
+                   </tr>
+               @endforeach
            </table>
+           @endif
        </div>
     </div>
 

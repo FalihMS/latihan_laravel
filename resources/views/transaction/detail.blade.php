@@ -19,77 +19,68 @@
 
 @section('content')
     <div class="title m-b-md display-4 text-center">
-        Detail <span class="text-primary">Product</span>
+        Detail <span class="text-primary">Transaction</span>
     </div>
     <div class="row justify-content-center m-5">
         <div class="col-8 justify-content-center text-center">
             <form>
                 <div class="row m-2">
                     <div class="col-4 text-right align-self-end">
-                        <h5>Product ID</h5>
+                        <h5>Transaction ID</h5>
                     </div>
                     <div class="col text-right align-self-end">
                         <h5>:</h5>
                     </div>
                     <div class="col-7">
-                        <input type="text" class="form-control" value="{{ $product->id }}" disabled>
+                        <input type="text" class="form-control" value="{{ $transaction->id }}" disabled>
                     </div>
                 </div>
                 <div class="row m-2">
                     <div class="col-4 text-right align-self-end">
-                        <h5>Product Name</h5>
+                        <h5>Staff Handled</h5>
                     </div>
                     <div class="col text-right align-self-end">
                         <h5>:</h5>
                     </div>
                     <div class="col-7">
-                        <input type="text" class="form-control" value="{{ $product->name }}" disabled>
+                        <input type="text" class="form-control" value="{{ ucwords($transaction->user->name) }}" disabled>
                     </div>
                 </div>
                 <div class="row m-2">
                     <div class="col-4 text-right align-self-end">
-                        <h5>Product Category</h5>
+                        <h5>Transaction Date</h5>
                     </div>
                     <div class="col text-right align-self-end">
                         <h5>:</h5>
                     </div>
                     <div class="col-7">
-                        <select name="" id="" class="form-control" disabled>
-                            <option value="Makanan" {{ $product->category == 'makanan'? 'selected': '' }}>Makanan</option>
-                            <option value="Minuman" {{ $product->category == 'minuman'? 'selected': '' }}>Minuman</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row m-2">
-                    <div class="col-4 text-right align-self-end">
-                        <h5>Product Quantity</h5>
-                    </div>
-                    <div class="col text-right align-self-end">
-                        <h5>:</h5>
-                    </div>
-                    <div class="col-7">
-                        <input type="text" class="form-control" value="{{ $product->qty }} pcs" disabled>
+                        <input type="text" class="form-control" value="{{$transaction->date}}" readonly>
                     </div>
                 </div>
                 <div class="row m-2">
                     <div class="col-4 text-right align-self-end">
-                        <h5>Product Price</h5>
+                        <h5>Transaction Worth</h5>
                     </div>
                     <div class="col text-right align-self-end">
                         <h5>:</h5>
                     </div>
                     <div class="col-7">
-                        <input type="text" class="form-control" value="Rp, {{ $product->price }}" disabled>
+                        <input type="text" class="form-control" value="Rp. {{ $transaction->total_price }}" disabled>
                     </div>
                 </div>
             </form>
             <hr>
-            <a href="#" class="btn btn-outline-primary">Edit Product</a>
-            <a href="#" class="btn btn-outline-danger">Delete Product</a>
+                <div class="row justify-content-around">
+                    @foreach($transaction->detail as $detail)
+                        <div class="col-3 card p-3 m-1">
+                            <h3 class="text-primary">{{ ucfirst($detail->product->name) }}</h3>
+                            <h5>{{ $detail->qty }} pcs</h5>
+                            <h3>Rp. {{ $detail->qty * $detail->product->price }}</h3>
+                        </div>
+                    @endforeach
+                </div>
             <hr>
-            <a href="{{ url('/product') }}" class="btn btn-outline-secondary">Go Back</a>
-
+            <a href="{{ url('/transaction') }}" class="btn btn-outline-secondary">Go Back</a>
 
         </div>
     </div>

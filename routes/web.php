@@ -19,6 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Route for Product
 Route::get('/product', 'productController@index');
-Route::get('/product/1', 'productController@show');
 Route::get('/product/create', 'productController@create');
+Route::get('/product/{id}', 'productController@show');
+
+//Route for Transaction
+Route::get('/transaction', 'transactionController@index');
+Route::get('/transaction/{id}', 'transactionController@show');
+Route::get('/transaction/create', 'transactionController@create');
